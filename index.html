@@ -110,5 +110,28 @@
         <p>Thank you for visiting my website!</p>
 
     </div>
+<script>
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("en-KE", {
+      timeZone: "Africa/Nairobi",
+      hour12: true
+    });
+
+  document.getElementById("today").textContent =
+    now.toLocaleDateString("en-KE", {
+      timeZone: "Africa/Nairobi",
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
 </body>
 </html>
