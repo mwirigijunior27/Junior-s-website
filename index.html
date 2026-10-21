@@ -85,7 +85,52 @@ body.dark-mode .container div {
 #today {
   font-size: 16px;
 }
-    </style>
+ /* --- Navigation Menu --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #01024a;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 22px;
+  color: white;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar .nav-links a:hover {
+  color: #8dcfff;
+  text-decoration: underline;
+}
+
+/* Dark mode for navbar */
+body.dark-mode .navbar {
+  background-color: #161b22 !important;
+  border: 1px solid #333;
+}   
+</style>
 </head>
 
 <body>
