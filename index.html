@@ -152,42 +152,51 @@ body.dark-mode .navbar {
 }
 .search-bar {
   flex: 1;
-  margin: 0 12px;
+  margin: 0 8px;
   padding: 8px 15px;
   border-radius: 20px;
   border: none;
   background: #f0f2f5;
   color: black;
 }
+.floating-menu {
+  display: flex !important;
+  flex-shrink: 0 !important;
+}
 .menu-btn {
-  width: 45px; height: 40px;
-  background: #f0f2f5;
-  border: 1px solid #444;
-  border-radius: 10px;
-  color: black;
-  font-size: 24px;
-  cursor: pointer;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  flex-shrink: 0 !important;
+  margin-left: 5px !important;
+  background: #0000cd !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 .menu-links {
   display: none;
   position: absolute;
   top: 55px; right: 10px;
-  background: #111;
+  background: white;
   border-radius: 12px;
   padding: 10px;
-  border: 1px solid #333;
+  border: 1px solid #ddd;
   min-width: 160px;
 }
 .menu-links a {
   display: block;
-  color: white;
+  color: black;
   padding: 12px 20px;
   text-decoration: none;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #eee;
 }
-.menu-links a:hover { background: #222; }
-.menu-links.show { display: block; }
-body { padding-top: 60px; }  
+.menu-links a:hover { background: #f0f2f5; }
+.menu-links.show { display: block; } 
 * { box-sizing: border-box; }
 html, body { margin: 0 !important; padding: 0 !important; background: #000 !important; width: 100% !important; }
 body { padding-top: 65px !important; 
