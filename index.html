@@ -169,6 +169,15 @@ body.dark-mode .navbar {
 </head>
 
 <body>
+<div class="floating-menu">
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div class="menu-links" id="menuLinks">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#clock" onclick="toggleMenu()">Clock</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </div>
+</div>
 <!-- Navigation Menu -->
 <nav class="navbar">
   <div class="logo">Junior27</div>
