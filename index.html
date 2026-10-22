@@ -130,7 +130,41 @@ body.dark-mode .container div {
 body.dark-mode .navbar {
   background-color: #161b22 !important;
   border: 1px solid #333;
-}   
+}
+/* FLOATING MENU - Always visible */
+.floating-menu {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+.menu-btn {
+  width: 55px;
+  height: 55px;
+  background: #111;
+  border: 2px solid #555;
+  border-radius: 12px;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+.menu-links {
+  display: none;
+  background: #111;
+  border-radius: 12px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #333;
+}
+.menu-links a {
+  display: block;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+}
+.menu-links a:hover { background: #222; }
+.menu-links.show { display: block; }   
 </style>
 </head>
 
