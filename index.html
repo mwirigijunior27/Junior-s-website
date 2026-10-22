@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Junior's Website</title>
 <style>
-/* Outer light blue visible around 90% box */
 html{ background: lightblue; }
 body{
   background: lightblue;
@@ -16,29 +15,33 @@ body{
 }
 body.dark-mode{ background: #0d1117; }
 
-/* White box 90% */
+/* 90% white box surrounded by light blue */
 .container{
   width: 90%;
   max-width: 500px;
   margin: 0 auto;
   background: white;
   border-radius: 22px;
-  padding: 15px;
+  padding: 12px;
   box-sizing: border-box;
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  overflow: visible;
 }
 body.dark-mode .container{ background: #161b22; color: white; }
 
-/* Top floating bar */
+/* FLOATING BAR - NOW 100% INSIDE WHITE BOX */
 .top-bar{
   display: flex;
   align-items: center;
   gap: 8px;
   background: #00008b;
-  border-radius: 12px;
-  padding: 8px;
+  border-radius: 14px;
+  padding: 8px 10px;
   margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
+  overflow: visible;
 }
 .profile-circle{
   width: 42px; height: 42px;
@@ -46,32 +49,41 @@ body.dark-mode .container{ background: #161b22; color: white; }
   border: 2px solid white;
   object-fit: cover;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .search-bar{
   flex: 1;
-  padding: 9px 15px;
+  min-width: 0;
+  padding: 10px 14px;
   border-radius: 20px;
   border: none;
   outline: none;
 }
+.floating-menu{
+  position: relative;
+  flex-shrink: 0;
+}
 .menu-btn{
-  width: 42px; height: 42px;
+  width: 44px; height: 40px;
   border-radius: 10px;
   border: none;
   background: #0000cd;
   color: white;
   font-size: 22px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .menu-links{
   display: none;
   position: absolute;
-  top: 60px; right: 0;
+  top: 50px; right: 0;
   background: white;
   border-radius: 12px;
   min-width: 180px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  z-index: 100;
+  z-index: 999;
   overflow: hidden;
 }
 .menu-links.show{ display: block; }
@@ -86,51 +98,49 @@ body.dark-mode .container{ background: #161b22; color: white; }
 body.dark-mode .menu-links{ background: #222; }
 body.dark-mode .menu-links a{ color: white; border-color: #333; }
 
-/* Content styles */
 h1{
   background: navy;
   color: white;
   text-align: center;
-  padding: 22px 10px;
+  padding: 20px 10px;
   border-radius: 18px;
-  font-size: 28px;
+  font-size: 26px;
+  margin: 0 0 15px 0;
 }
 .profile{
   display: block;
   width: 180px; height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 20px auto;
+  margin: 15px auto;
   border: 4px solid lightblue;
   cursor: pointer;
 }
-h2{ color: darkgreen; margin: 20px 0 5px 0; }
+h2{ color: darkgreen; margin: 18px 0 5px 0; }
 body.dark-mode h2{ color: #4ade80; }
 p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 .clock-box{
-  background: navy;
+  background: #00008b;
   color: white;
   text-align: center;
   padding: 18px;
   border-radius: 18px;
-  margin: 20px 0;
+  margin: 18px 0;
 }
 .clock-box h2{ color: white; margin: 0; }
 #clock{ font-size: 28px; font-weight: bold; margin: 10px 0; }
 #today{ font-size: 15px; }
 
-/* Bottom contact card */
 #contact-bottom{
   background: #01024a;
   color: white;
   padding: 18px;
   border-radius: 18px;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 20px;
 }
-#contact-bottom h2{ color: #4ade80; text-align: center; }
+#contact-bottom h2{ color: #4ade80; }
 
-/* Profile big view */
 #profileModal{
   display: none;
   position: fixed;
@@ -138,7 +148,7 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
   background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 #profileModal img{
   width: 85%; max-width: 300px;
@@ -153,24 +163,24 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 <div id="profileModal" onclick="closeProfile()"><img src="myphoto.jpg"></div>
 
 <div class="container">
-  <!-- Floating bar -->
+  <!-- TOP BAR FIXED - MENU NOW INSIDE BAR -->
   <div class="top-bar">
     <img src="myphoto.jpg" class="profile-circle" onclick="openProfile()">
     <input type="text" id="searchInput" class="search-bar" placeholder="Search..." onkeyup="searchFunc()">
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    <div class="menu-links" id="menuLinks">
-      <a href="#home" onclick="goTo('home')">Home</a>
-      <a href="#about" onclick="goTo('about')">About</a>
-      <a href="#clockBox" onclick="goTo('clockBox')">Clock</a>
-      <a href="#contactTop" onclick="goTo('contactTop')">Contact</a>
-      <a href="#" onclick="toggleDarkMode(); return false;" id="darkText">🌙 Dark Mode</a>
+    <div class="floating-menu">
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <div class="menu-links" id="menuLinks">
+        <a href="#home" onclick="goTo('home')">Home</a>
+        <a href="#about" onclick="goTo('about')">About</a>
+        <a href="#clockBox" onclick="goTo('clockBox')">Clock</a>
+        <a href="#contactTop" onclick="goTo('contactTop')">Contact</a>
+        <a href="#" onclick="toggleDarkMode(); return false;" id="darkText">🌙 Dark Mode</a>
+      </div>
     </div>
   </div>
 
   <h1 id="home">Welcome to My Website!</h1>
-
   <img src="myphoto.jpg" class="profile" onclick="openProfile()">
-
   <div class="clock-box" id="clockBox">
     <h2>My Live Clock 🕒</h2>
     <div id="clock">Loading...</div>
@@ -178,14 +188,11 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
   </div>
 
   <p>Hello! My name is Junior.</p>
-
   <h2 id="about">About Me</h2>
   <p>I am a boy who is learning how to create websites.</p>
-
   <h2>My Hobbies</h2>
   <p>I enjoy learning new things and creating websites.</p>
 
-  <!-- FIRST CONTACT - SOCIAL ONLY -->
   <h2 id="contactTop">Contact Me</h2>
   <p>Facebook: Sparta Vaniq</p>
   <p>Instagram: Sparta_Vaniq 11</p>
@@ -194,7 +201,6 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
   <p>Chogoria town in Tharaka Nithi, Kenya.</p>
   <p>Thank you for visiting my website!</p>
 
-  <!-- SECOND CONTACT - EMAIL + GITHUB -->
   <div id="contact-bottom">
     <h2>Contact Me</h2>
     <p>Email: mwirigijunior278@gmail.com</p>
@@ -204,44 +210,37 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 
 <script>
 function updateClock(){
-  const n = new Date();
-  document.getElementById("clock").textContent = n.toLocaleTimeString("en-KE",{timeZone:"Africa/Nairobi",hour12:true});
-  document.getElementById("today").textContent = n.toLocaleDateString("en-KE",{timeZone:"Africa/Nairobi",weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  const n=new Date();
+  document.getElementById("clock").textContent=n.toLocaleTimeString("en-KE",{timeZone:"Africa/Nairobi",hour12:true});
+  document.getElementById("today").textContent=n.toLocaleDateString("en-KE",{timeZone:"Africa/Nairobi",weekday:"long",year:"numeric",month:"long",day:"numeric"});
 }
 updateClock(); setInterval(updateClock,1000);
 
-function toggleMenu(){
-  document.getElementById("menuLinks").classList.toggle("show");
-}
-function goTo(id){
-  toggleMenu();
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-  showAll();
-}
+function toggleMenu(){ document.getElementById("menuLinks").classList.toggle("show"); }
+function goTo(id){ toggleMenu(); document.getElementById(id).scrollIntoView({behavior:"smooth"}); showAll(); }
 function searchFunc(){
-  const q = document.getElementById("searchInput").value.toLowerCase();
+  const q=document.getElementById("searchInput").value.toLowerCase();
   document.querySelectorAll("h1,h2,p,.clock-box,#contact-bottom").forEach(el=>{
     el.classList.toggle("hidden", q && !el.innerText.toLowerCase().includes(q));
   });
 }
-function showAll(){
-  document.querySelectorAll(".hidden").forEach(e=>e.classList.remove("hidden"));
-}
+function showAll(){ document.querySelectorAll(".hidden").forEach(e=>e.classList.remove("hidden")); }
 function openProfile(){ document.getElementById("profileModal").style.display="flex"; }
 function closeProfile(){ document.getElementById("profileModal").style.display="none"; }
-
 function toggleDarkMode(){
   document.body.classList.toggle("dark-mode");
-  const isDark = document.body.classList.contains("dark-mode");
-  document.getElementById("darkText").textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-  localStorage.setItem("dark", isDark);
+  const d=document.body.classList.contains("dark-mode");
+  document.getElementById("darkText").textContent=d?"☀️ Light Mode":"🌙 Dark Mode";
+  localStorage.setItem("dark",d);
 }
 if(localStorage.getItem("dark")==="true"){
   document.body.classList.add("dark-mode");
   document.getElementById("darkText").textContent="☀️ Light Mode";
 }
 document.addEventListener("click",e=>{
-  if(!e.target.closest(".top-bar")) document.getElementById("menuLinks").classList.remove("show");
+  if(!e.target.closest(".floating-menu") && !e.target.closest(".menu-btn")){
+    document.getElementById("menuLinks").classList.remove("show");
+  }
 });
 </script>
 </body>
