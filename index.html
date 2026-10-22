@@ -169,7 +169,10 @@ body.dark-mode .navbar {
 </head>
 
 <body>
-<div class="floating-menu">
+<div class="top-bar">
+  <img src="myphoto.jpg" class="profile-circle">
+  <input type="text" class="search-bar" placeholder="Search...">
+  <div class="floating-menu">
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <div class="menu-links" id="menuLinks">
     <a href="#home" onclick="toggleMenu()">Home</a>
@@ -177,7 +180,7 @@ body.dark-mode .navbar {
     <a href="#clock" onclick="toggleMenu()">Clock</a>
     <a href="#contact" onclick="toggleMenu()">Contact</a>
   </div>
-</div>
+</div> 
 <button id="darkModeToggle">🌙 Dark Mode</button>
     <div id="home" class="container">
 
