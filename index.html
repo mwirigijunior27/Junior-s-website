@@ -11,7 +11,6 @@ body{
   margin: 0;
   padding: 15px 0;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
 }
 body.dark-mode{ background: #0d1117; }
 
@@ -22,26 +21,26 @@ body.dark-mode{ background: #0d1117; }
   margin: 0 auto;
   background: white;
   border-radius: 22px;
-  padding: 12px;
+  padding: 0 12px 12px 12px;
   box-sizing: border-box;
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-  overflow: visible;
 }
 body.dark-mode .container{ background: #161b22; color: white; }
 
-/* FLOATING BAR - NOW 100% INSIDE WHITE BOX */
+/* FLOATING BAR - FOLLOWS WHEN YOU SCROLL */
 .top-bar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
   display: flex;
   align-items: center;
   gap: 8px;
   background: #00008b;
   border-radius: 14px;
   padding: 8px 10px;
-  margin-bottom: 15px;
+  margin: 0 -2px 15px -2px;
   width: 100%;
   box-sizing: border-box;
-  position: relative;
-  overflow: visible;
 }
 .profile-circle{
   width: 42px; height: 42px;
@@ -52,17 +51,13 @@ body.dark-mode .container{ background: #161b22; color: white; }
   flex-shrink: 0;
 }
 .search-bar{
-  flex: 1;
-  min-width: 0;
+  flex: 1; min-width: 0;
   padding: 10px 14px;
   border-radius: 20px;
   border: none;
   outline: none;
 }
-.floating-menu{
-  position: relative;
-  flex-shrink: 0;
-}
+.floating-menu{ position: relative; flex-shrink: 0; }
 .menu-btn{
   width: 44px; height: 40px;
   border-radius: 10px;
@@ -71,9 +66,6 @@ body.dark-mode .container{ background: #161b22; color: white; }
   color: white;
   font-size: 22px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .menu-links{
   display: none;
@@ -83,7 +75,7 @@ body.dark-mode .container{ background: #161b22; color: white; }
   border-radius: 12px;
   min-width: 180px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  z-index: 999;
+  z-index: 1000;
   overflow: hidden;
 }
 .menu-links.show{ display: block; }
@@ -129,7 +121,6 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 }
 .clock-box h2{ color: white; margin: 0; }
 #clock{ font-size: 28px; font-weight: bold; margin: 10px 0; }
-#today{ font-size: 15px; }
 
 #contact-bottom{
   background: #01024a;
@@ -150,11 +141,7 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
   align-items: center;
   z-index: 9999;
 }
-#profileModal img{
-  width: 85%; max-width: 300px;
-  border-radius: 20px;
-  border: 4px solid white;
-}
+#profileModal img{ width: 85%; max-width: 300px; border-radius: 20px; border: 4px solid white; }
 .hidden{ display: none !important; }
 </style>
 </head>
@@ -163,7 +150,7 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 <div id="profileModal" onclick="closeProfile()"><img src="myphoto.jpg"></div>
 
 <div class="container">
-  <!-- TOP BAR FIXED - MENU NOW INSIDE BAR -->
+  <!-- FLOATING STICKY BAR -->
   <div class="top-bar">
     <img src="myphoto.jpg" class="profile-circle" onclick="openProfile()">
     <input type="text" id="searchInput" class="search-bar" placeholder="Search..." onkeyup="searchFunc()">
@@ -181,6 +168,7 @@ p{ font-size: 19px; line-height: 1.5; margin: 8px 0; }
 
   <h1 id="home">Welcome to My Website!</h1>
   <img src="myphoto.jpg" class="profile" onclick="openProfile()">
+
   <div class="clock-box" id="clockBox">
     <h2>My Live Clock 🕒</h2>
     <div id="clock">Loading...</div>
@@ -215,16 +203,14 @@ function updateClock(){
   document.getElementById("today").textContent=n.toLocaleDateString("en-KE",{timeZone:"Africa/Nairobi",weekday:"long",year:"numeric",month:"long",day:"numeric"});
 }
 updateClock(); setInterval(updateClock,1000);
-
 function toggleMenu(){ document.getElementById("menuLinks").classList.toggle("show"); }
-function goTo(id){ toggleMenu(); document.getElementById(id).scrollIntoView({behavior:"smooth"}); showAll(); }
+function goTo(id){ toggleMenu(); document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
 function searchFunc(){
   const q=document.getElementById("searchInput").value.toLowerCase();
   document.querySelectorAll("h1,h2,p,.clock-box,#contact-bottom").forEach(el=>{
     el.classList.toggle("hidden", q && !el.innerText.toLowerCase().includes(q));
   });
 }
-function showAll(){ document.querySelectorAll(".hidden").forEach(e=>e.classList.remove("hidden")); }
 function openProfile(){ document.getElementById("profileModal").style.display="flex"; }
 function closeProfile(){ document.getElementById("profileModal").style.display="none"; }
 function toggleDarkMode(){
