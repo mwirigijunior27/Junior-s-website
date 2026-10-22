@@ -135,14 +135,18 @@ body.dark-mode .navbar {
 .top-bar {
   position: relative !important;
   width: 100% !important;
+  max-width: 100% !important;
   height: 55px !important;
-  background: #00008b !important; /* THIS IS YOUR BLUE! */
+  background: #00008b !important;
   border-radius: 12px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 8px 12px !important;
+  padding: 8px 8px 8px 12px !important;
   margin-bottom: 15px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  gap: 8px !important;
 }
 .profile-circle {
   width: 40px; height: 40px;
@@ -151,24 +155,27 @@ body.dark-mode .navbar {
   object-fit: cover;
 }
 .search-bar {
-  flex: 1;
-  margin: 0 8px;
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: none;
-  background: #f0f2f5;
-  color: black;
+  flex: 1 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  padding: 8px 15px !important;
+  border-radius: 20px !important;
+  border: none !important;
+  background: #f0f2f5 !important;
+  color: black !important;
 }
 .floating-menu {
   display: flex !important;
   flex-shrink: 0 !important;
+  margin: 0 !important;
+  position: static !important;
 }
 .menu-btn {
   width: 40px !important;
   height: 40px !important;
   min-width: 40px !important;
   flex-shrink: 0 !important;
-  margin-left: 5px !important;
+  margin: 0 !important;
   background: #0000cd !important;
   color: white !important;
   border: none !important;
