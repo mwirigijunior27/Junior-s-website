@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080879">
+<title>Junior's Personal Website</title>
+
+<style>
+:root {
+  --blue: #080879;
+  --green: #008744;
+  --page: lightblue;
+  --card: white;
+  --text: #111111;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  background: var(--page);
+  color: var(--text);
+  transition: background .3s, color .3s;
+}
+
+body.dark {
+  --page: #101020;
+  --card: #202035;
+  --text: #ffffff;
+}
+
+header {
+  position: sticky;
+  top: 6px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 14px;
+  background: var(--blue);
+  margin-bottom: 14px;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+#search {
+  flex: 1;
+  min-width: 0;
+  padding: 10px;
+  border: 0;
+  border-radius: 25px;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.menu-button {
+  color: white;
+  background: transparent;
+  border: 0;
+  font-size: 25px;
+}
+
+nav {
+  display: none;
+  position: absolute;
+  right: 8px;
+  top: 52px;
+  width: 175px;
+  background: var(--card);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 4px 12px #0004;
+}
+
+nav.open {
+  display: block;
+}
+
+nav a, nav button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+nav a:hover, nav button:hover {
+  background: #8883;
+}
+
+section {
+  margin: 14px 0;
+  scroll-margin-top: 80px;
+}
+
+.welcome {
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  padding: 18px 8px;
+  border-radius: 13px;
+}
+
+.profile {
+  display: block;
+  width: 145px;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin: 16px auto;
+  cursor: pointer;
+}
+
+.clock-card, .contact-card, .music-card {
+  background: var(--blue);
+  color: white;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  margin: 14px 0;
+}
+
+#time {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+#date {
+  font-size: 14px;
+}
+
+h2 {
+  color: var(--green);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.contact-card a, .contact-card button {
+  color: white;
+}
+
+.contact-card a {
+  overflow-wrap: anywhere;
+}
+
+.music-card button {
+  padding: 10px 14px;
+  margin: 4px;
+  border: 0;
+  border-radius: 20px;
+  background: white;
+  color: var(--blue);
+}
+
+#volume {
+  width: 90%;
+  margin-top: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 18px 8px;
+}
+
+#photoViewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #000e;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#photoViewer img {
+  max-width: 95%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+#closePhoto {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  background: #333;
+  border: 0;
+  border-radius: 50%;
+  padding: 10px 14px;
+}
+
+#noResults {
+  display: none;
+  text-align: center;
+}
+
+@media (min-width: 650px) {
+  body {
+    max-width: 760px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .profile {
+    width: 175px;
+    height: 175px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img class="logo" src="profile.jpg"
+       alt="Junior's profile picture" data-photo>
+
+  <input id="search" type="search"
+         placeholder="Search website..."
+         aria-label="Search website">
+
+  <button class="menu-button" id="menuButton"
+          aria-label="Open navigation menu"
+          aria-expanded="false">☰</button>
+
+  <nav id="navigation">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#clock">Clock</a>
+    <a href="#hobbies">My Hobbies</a>
+    <a href="#music">Music Player</a>
+    <a href="#contact">Contact</a>
+    <button id="themeButton">🌙 Dark Mode</button>
+  </nav>
+</header>
+
+<main id="mainContent">
+
+<section id="home" data-search>
+  <div class="welcome">
+    <h1>Welcome to My Website!</h1>
+  </div>
+
+  <img class="profile" src="profile.jpg"
+       alt="My picture" data-photo>
+
+  <div class="clock-card" id="clock">
+    <strong>My Live Clock 🕒</strong>
+    <div id="time">Loading time...</div>
+    <div id="date">Loading date...</div>
+  </div>
+
+  <p>Hello! My name is Junior.</p>
+</section>
+
+<section id="about" data-search>
+  <h2>About Me</h2>
+  <p>I am a boy who is learning how to create websites.</p>
+</section>
+
+<section id="hobbies" data-search>
+  <h2>My Hobbies</h2>
+  <p>I enjoy learning new things and creating websites.</p>
+</section>
+
+<section id="music" data-search>
+  <h2>My Music Player 🎵</h2>
+
+  <div class="music-card">
+    <p>Enjoy listening to music while visiting my website.</p>
+
+    <audio id="audio" preload="metadata">
+      <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
+
+    <button id="playButton">▶ Play</button>
+    <button id="pauseButton">⏸ Pause</button>
+    <button id="stopButton">⏹ Stop</button>
+
+    <p id="musicStatus" aria-live="polite">
+      Ready to play
+    </p>
+
+    <label for="volume">Volume</label><br>
+    <input id="volume" type="range"
+           min="0" max="1" step="0.05" value="0.7">
+  </div>
+</section>
+
+<section id="contact" data-search>
+  <h2>Contact Me</h2>
+  <p>Facebook: Sparta Vaniq</p>
+  <p>Instagram: Sparta_Vaniq 11</p>
+
+  <h2>My Location</h2>
+  <p>Chogoria town in Tharaka Nithi, Kenya.</p>
+
+  <p>Thank you for visiting my website!</p>
+
+  <div class="contact-card">
+    <h2 style="color:white">Contact Me</h2>
+
+    <p>
+      Email:<br>
+      <a href="mailto:mwirigijunior@gmail.com">
+        mwirigijunior@gmail.com
+      </a>
+    </p>
+
+    <p>
+      GitHub:<br>
+      <a href="https://github.com/junior27">
+        github.com/junior27
+      </a>
+    </p>
+
+    <p>
+      <a href="https://junior27.github.io">
+        Visit My Website
+      </a>
+    </p>
+  </div>
+</section>
+
+<p id="noResults">No matching sections found.</p>
+
+</main>
+
+<footer>
+  <p>Made with ❤️ by Junior</p>
+  <p>Thank you for visiting my website!</p>
+</footer>
+
+<div id="photoViewer" role="dialog"
+     aria-label="Enlarged profile picture">
+  <button id="closePhoto" aria-label="Close picture">✕</button>
+  <img id="largePhoto" src="profile.jpg" alt="Enlarged profile picture">
+</div>
+
+<script>
+// Navigation menu
+const menuButton = document.getElementById("menuButton");
+const navigation = document.getElementById("navigation");
+
+menuButton.addEventListener("click", () => {
+  const opened = navigation.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", opened);
+});
+
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navigation.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  });
+});
+
+// Live clock and date
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("time").textContent =
+    now.toLocaleTimeString("en-KE", {
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("en-KE", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+// Light and dark mode
+const themeButton = document.getElementById("themeButton");
+
+themeButton.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  const isDark = document.body.classList.contains("dark");
+  themeButton.textContent = isDark
+    ? "☀️ Light Mode"
+    : "🌙 Dark Mode";
+});
+
+// Search website sections
+const search = document.getElementById("search");
+const sections = document.querySelectorAll("[data-search]");
+const noResults = document.getElementById("noResults");
+
+search.addEventListener("input", () => {
+  const query = search.value.trim().toLowerCase();
+  let found = false;
+
+  sections.forEach(section => {
+    const matches = section.textContent.toLowerCase()
+      .includes(query);
+
+    section.style.display = matches ? "" : "none";
+    if (matches) found = true;
+  });
+
+  noResults.style.display = found ? "none" : "block";
+});
+
+// Enlarge picture when tapped
+const photoViewer = document.getElementById("photoViewer");
+const largePhoto = document.getElementById("largePhoto");
+
+document.querySelectorAll("[data-photo]").forEach(photo => {
+  photo.addEventListener("click", () => {
+    largePhoto.src = photo.src;
+    photoViewer.style.display = "flex";
+  });
+});
+
+function closePicture() {
+  photoViewer.style.display = "none";
+}
+
+document.getElementById("closePhoto")
+  .addEventListener("click", closePicture);
+
+photoViewer.addEventListener("click", event => {
+  if (event.target === photoViewer) closePicture();
+});
+
+// Music player
+const audio = document.getElementById("audio");
+const playButton = document.getElementById("playButton");
+const musicStatus = document.getElementById("musicStatus");
+
+playButton.addEventListener("click", async () => {
+  try {
+    await audio.play();
+    musicStatus.textContent = "Music is playing 🎵";
+  } catch (error) {
+    musicStatus.textContent =
+      "Add music.mp3 to your GitHub repository first.";
+  }
+});
+
+document.getElementById("pauseButton")
+  .addEventListener("click", () => {
+    audio.pause();
+    musicStatus.textContent = "Music paused";
+  });
+
+document.getElementById("stopButton")
+  .addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    musicStatus.textContent = "Music stopped";
+  });
+
+document.getElementById("volume").addEventListener("input", event => {
+  audio.volume = Number(event.target.value);
+});
+
+audio.addEventListener("ended", () => {
+  musicStatus.textContent = "Music finished";
+});
+
+audio.addEventListener("error", () => {
+  musicStatus.textContent =
+    "Music file not found. Check music.mp3.";
+});
+</script>
+
+</body>
+</html>
